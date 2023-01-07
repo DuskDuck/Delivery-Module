@@ -86,7 +86,7 @@ public class ShippingController {
     }
 
     //
-    @GetMapping(path = "/shipping_order")
+    @GetMapping(path = "/shipping_order/")
     public  CommonResponse getAllshipping(){
         return shippingService.getShippingOrder();
     }
