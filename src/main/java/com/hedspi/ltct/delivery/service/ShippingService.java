@@ -139,7 +139,6 @@ public class ShippingService {
     }
     public void addNewSorder(ShippingOrder shippingOrder){
         shippingOrderRepository.save(shippingOrder);
-        shippingOrder.calFee();
         System.out.println(shippingOrder);
     }
 

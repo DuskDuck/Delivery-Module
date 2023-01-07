@@ -30,6 +30,7 @@ public class ShippingController {
         shippingorder.setStatusCode(shippingService.getStatusCodebyId(1));
         shippingorder.setCreateAt(Instant.now());
         shippingorder.setUpdateAt(Instant.now());
+        shippingorder.calFee();
         shippingService.addNewSorder(shippingorder);
         return new CommonResponse(new Result("200","success",true),shippingorder);
     }
@@ -41,7 +42,7 @@ public class ShippingController {
     }
 
     //ok
-    @PutMapping(path = "/shipping_order/redeliver/{orderCode}")
+    @PutMapping(path = "/api/shipping_order/redeliver/{orderCode}")
     public CommonResponse Reshipping(@PathVariable("orderCode") String orderCode, @RequestBody Product product){
         return shippingService.reshipping(orderCode,product,shippingService.getStatusCodebyId(2));
     }
