@@ -42,7 +42,7 @@ public class ShippingController {
     }
 
     //ok
-    @PutMapping(path = "/api/shipping_order/redeliver/{orderCode}")
+    @PutMapping(path = "/shipping_order/redeliver/{orderCode}")
     public CommonResponse Reshipping(@PathVariable("orderCode") String orderCode, @RequestBody Product product){
         return shippingService.reshipping(orderCode,product,shippingService.getStatusCodebyId(2));
     }
