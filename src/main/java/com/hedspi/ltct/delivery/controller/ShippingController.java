@@ -25,7 +25,7 @@ public class ShippingController {
 
     //REQUIRED
     //ok
-    @PostMapping(path = "/shipping_order")
+    @PostMapping(value = "/shipping_order", consumes = "application/json", produces = "application/json")
     public CommonResponse registerNewShipping(@RequestBody ShippingOrder shippingorder){
         shippingorder.setStatusCode(shippingService.getStatusCodebyId(1));
         shippingorder.setCreateAt(Instant.now());
