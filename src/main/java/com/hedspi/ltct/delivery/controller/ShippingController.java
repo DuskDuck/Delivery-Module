@@ -25,26 +25,16 @@ public class ShippingController {
 
     //REQUIRED
     //ok
-    @PostMapping(path = "/shipping_order")
+    @RequestMapping(value = "/shipping_order",
+            produces = "application/json",
+            method=RequestMethod.POST)
     public CommonResponse registerNewShipping(@RequestBody ShippingOrder shippingorder){
         shippingorder.setStatusCode(shippingService.getStatusCodebyId(1));
         shippingorder.setCreateAt(Instant.now());
         shippingorder.setUpdateAt(Instant.now());
         shippingorder.calFee();
         shippingService.addNewSorder(shippingorder);
-        return new CommonResponse(new Result("200","success",true),shippingorder);
-    }
-
-    //ok
-    @GetMapping(path = "/shipping_order/status/{orderCode}")
-    public CommonResponse getOrderStatus(@PathVariable("orderCode") String orderCode){
-        return shippingService.getStatusbyCode(orderCode);
-    }
-
-    //ok
-    @PutMapping(path = "/shipping_order/redeliver/{orderCode}")
-    public CommonResponse Reshipping(@PathVariable("orderCode") String orderCode, @RequestBody Product product){
-        return shippingService.reshipping(orderCode,product,shippingService.getStatusCodebyId(2));
+        return new CommonResponse(new Result("200","success",true));
     }
 
     //ok
@@ -60,6 +50,21 @@ public class ShippingController {
         );
         return new CommonResponse(new Result("200","success",true),feeResult);
     }
+
+    //ok
+    @GetMapping(path = "/shipping_order/status/{orderCode}")
+    public CommonResponse getOrderStatus(@PathVariable("orderCode") String orderCode){
+        return shippingService.getStatusbyCode(orderCode);
+    }
+
+    //ok
+    @PutMapping(path = "/shipping_order/redeliver/{orderCode}")
+    public CommonResponse Reshipping(@PathVariable("orderCode") String orderCode, @RequestBody Product product){
+        return shippingService.reshipping(orderCode,product,shippingService.getStatusCodebyId(2));
+    }
+
+
+
 
     //ok
     @PutMapping(path = "/shipping_order/fee/{orderCode}")
@@ -86,7 +91,7 @@ public class ShippingController {
     }
 
     //
-    @GetMapping(path = "/shipping_order/")
+    @GetMapping(path = "/shipping_order/all")
     public  CommonResponse getAllshipping(){
         return shippingService.getShippingOrder();
     }
