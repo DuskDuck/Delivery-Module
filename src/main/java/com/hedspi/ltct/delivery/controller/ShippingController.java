@@ -37,7 +37,7 @@ public class ShippingController {
 
     @GetMapping(path = "/shipping_order")
     public CommonResponse getAllshipping(){
-        return shippingService.getAllStatus();
+        return shippingService.getShippingOrder();
     }
     //ok
     @PostMapping(path = "/shipping_fee")
