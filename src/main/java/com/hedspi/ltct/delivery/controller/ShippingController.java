@@ -37,6 +37,12 @@ public class ShippingController {
         return new CommonResponse(new Result("200","success",true));
     }
 
+    @RequestMapping(value = "/shipping_order",
+            produces = "application/json",
+            method=RequestMethod.GET)
+    public CommonResponse getAllshipping(){
+        return shippingService.getShippingOrder();
+    }
     //ok
     @PostMapping(path = "/shipping_fee")
     public CommonResponse calShippingFee(@RequestBody Fee fee){
@@ -49,6 +55,11 @@ public class ShippingController {
                 0
         );
         return new CommonResponse(new Result("200","success",true),feeResult);
+    }
+
+    @GetMapping(path = "/shipping_fee")
+    public CommonResponse getAllFee(){
+        return shippingService.getAllFee();
     }
 
     //ok
@@ -91,10 +102,7 @@ public class ShippingController {
     }
 
     //
-    @GetMapping(path = "/shipping_order/all")
-    public  CommonResponse getAllshipping(){
-        return shippingService.getShippingOrder();
-    }
+
 
 
 }

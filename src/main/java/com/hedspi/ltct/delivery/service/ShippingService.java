@@ -37,6 +37,9 @@ public class ShippingService {
     public CommonResponse getShippingOrder() {
         return new CommonResponse(new Result("200","success",true),shippingOrderRepository.findAll());
     }
+    public CommonResponse getAllFee() {
+        return new CommonResponse(new Result("200","success",true),feeRepository.findAll());
+    }
 
     public CommonResponse getSorderbyId(Long Id){
         Optional<ShippingOrder> shippingOrder = shippingOrderRepository.findById(Id);
