@@ -25,9 +25,7 @@ public class ShippingController {
 
     //REQUIRED
     //ok
-    @RequestMapping(value = "/shipping_order",
-            produces = "application/json",
-            method=RequestMethod.POST)
+    @PostMapping(path = "/shipping_order")
     public CommonResponse registerNewShipping(@RequestBody ShippingOrder shippingorder){
         shippingorder.setStatusCode(shippingService.getStatusCodebyId(1));
         shippingorder.setCreateAt(Instant.now());
@@ -37,9 +35,7 @@ public class ShippingController {
         return new CommonResponse(new Result("200","success",true));
     }
 
-    @RequestMapping(value = "/shipping_order",
-            produces = "application/json",
-            method=RequestMethod.GET)
+    @GetMapping(path = "/shipping_order")
     public CommonResponse getAllshipping(){
         return shippingService.getShippingOrder();
     }
