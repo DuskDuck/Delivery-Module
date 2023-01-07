@@ -41,6 +41,10 @@ public class ShippingService {
         return new CommonResponse(new Result("200","success",true),feeRepository.findAll());
     }
 
+    public CommonResponse getAllStatus() {
+        return new CommonResponse(new Result("200","success",true),statusRepository.findAll());
+    }
+
     public CommonResponse getSorderbyId(Long Id){
         Optional<ShippingOrder> shippingOrder = shippingOrderRepository.findById(Id);
         if(shippingOrder.isPresent()){
