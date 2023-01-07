@@ -12,7 +12,7 @@ import java.time.Instant;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api")
+@RequestMapping(path = "/api")
 public class ShippingController {
 
     private final ShippingService shippingService;
