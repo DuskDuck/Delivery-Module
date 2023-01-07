@@ -29,7 +29,11 @@ public class StatusConfig {
                     4,
                     "hủy giao hàng"
             );
-            repository.saveAll(List.of(status1,status2,status3,status4));
+            Status status5 = new Status(
+                    5,
+                    "trả hàng"
+            );
+            repository.saveAll(List.of(status1,status2,status3,status4,status5));
         };
     }
 }
