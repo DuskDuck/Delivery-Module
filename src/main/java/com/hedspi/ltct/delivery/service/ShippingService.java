@@ -68,6 +68,21 @@ public class ShippingService {
         return new CommonResponse(new Result("400","fail: Shipping order with id " + Id + " can not be found",false),null);
     }
 
+    public CommonResponse countSorderbyStatus(Integer Id){
+        Optional<Status> statuscodeotp = statusRepository.findById(Id);
+        Integer count = 0;
+        if(statuscodeotp.isPresent()){
+            List<ShippingOrder> orderList = shippingOrderRepository.findAll();
+            for(int i = 0; i < orderList.size(); i++){
+                if(orderList.get(i).getStatusCode().getId() == Id){
+                    count ++;
+                }
+            }
+            return new CommonResponse(new Result("200","success",true),count);
+        }
+        return new CommonResponse(new Result("400","fail: Shipping order with id " + Id + " can not be found",false),null);
+    }
+
     public CommonResponse getOrderbyCode(String code){
         List<ShippingOrder> orderList = shippingOrderRepository.findAll();
         for(int i = 0; i < orderList.size(); i++) {

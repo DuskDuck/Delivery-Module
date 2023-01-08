@@ -109,6 +109,9 @@ public class ShippingController {
         return shippingService.getSorderbyStatus(Id);
     }
 
-
+    @GetMapping(path = "shipping_order/count/status/{statusId}")
+    public CommonResponse countOrderbyStatus(@PathVariable("statusId") Integer Id){
+        return shippingService.countSorderbyStatus(Id);
+    }
 
 }
