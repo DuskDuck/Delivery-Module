@@ -35,10 +35,6 @@ public class ShippingController {
         return new CommonResponse(new Result("200","success",true));
     }
 
-    @GetMapping(path = "/shipping_order")
-    public CommonResponse getAllshipping(){
-        return shippingService.getShippingOrder();
-    }
     //ok
     @PostMapping(path = "/shipping_fee")
     public CommonResponse calShippingFee(@RequestBody Fee fee){
@@ -97,7 +93,21 @@ public class ShippingController {
         return shippingService.updateOrderStatus(orderCode, shippingService.getStatusCodebyId(3));
     }
 
-    //
+    //For BE
+    @GetMapping(path = "/shipping_order")
+    public CommonResponse getAllshipping(){
+        return shippingService.getShippingOrder();
+    }
+
+    @GetMapping(path = "/shipping_order/{orderCode}")
+    public CommonResponse getOrderSpecific(@PathVariable("orderCode") String orderCode){
+        return shippingService.getOrderbyCode(orderCode);
+    }
+
+    @GetMapping(path = "shipping_order/group/status/{statusId}")
+    public CommonResponse getOrderbyStatus(@PathVariable("statusId") Integer Id){
+        return shippingService.getSorderbyStatus(Id);
+    }
 
 
 
