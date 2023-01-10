@@ -118,7 +118,7 @@ public class ShippingController {
 
     @PutMapping(path = "/shipping_order/status/{orderCode}/{statusid}")
     public CommonResponse updateOrderStatusFE(@PathVariable("orderCode") String orderCode,@PathVariable("statusid") Integer statusid){
-        return shippingService.updateOrderStatus(orderCode, shippingService.getStatusCodebyId(statusid));
+        return shippingService.updateOrderStatusFE(orderCode, shippingService.getStatusCodebyId(statusid));
     }
 
 
