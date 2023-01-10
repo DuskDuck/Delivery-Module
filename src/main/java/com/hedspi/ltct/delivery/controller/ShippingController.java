@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
-@CrossOrigin(origins = "http://localhost:3000")
 public class ShippingController {
 
     private final ShippingService shippingService;
@@ -28,12 +27,16 @@ public class ShippingController {
     //ok
     @PostMapping(value = "/shipping_order", consumes = "application/json", produces = "application/json")
     public CommonResponse registerNewShipping(@RequestBody ShippingOrder shippingorder){
-        shippingorder.setStatusCode(shippingService.getStatusCodebyId(1));
-        shippingorder.setCreateAt(Instant.now());
-        shippingorder.setUpdateAt(Instant.now());
-        shippingorder.calFee();
-        shippingService.addNewSorder(shippingorder);
-        return new CommonResponse(new Result("200","success",true));
+        if(shippingorder.checkValidity()) {
+            shippingorder.setStatusCode(shippingService.getStatusCodebyId(1));
+            shippingorder.setCreateAt(Instant.now());
+            shippingorder.setUpdateAt(Instant.now());
+            shippingorder.calFee();
+            shippingService.addNewSorder(shippingorder);
+            return new CommonResponse(new Result("200", "success", true));
+        }else{
+            return new CommonResponse(new Result("400", "Incorrect info format", false));
+        }
     }
 
     //ok
@@ -67,9 +70,6 @@ public class ShippingController {
         return shippingService.reshipping(orderCode,product,shippingService.getStatusCodebyId(2));
     }
 
-
-
-
     //ok
     @PutMapping(path = "/shipping_order/fee/{orderCode}")
     public CommonResponse calShippingFee(@PathVariable("orderCode") String orderCode){
@@ -94,7 +94,7 @@ public class ShippingController {
         return shippingService.updateOrderStatus(orderCode, shippingService.getStatusCodebyId(3));
     }
 
-    //For BE
+    //For FE
     @GetMapping(path = "/shipping_order")
     public CommonResponse getAllshipping(){
         return shippingService.getShippingOrder();
@@ -114,5 +114,11 @@ public class ShippingController {
     public CommonResponse countOrderbyStatus(@PathVariable("statusId") Integer Id){
         return shippingService.countSorderbyStatus(Id);
     }
+
+    @PutMapping(path = "/shipping_order/status/{orderCode}/{statusid}")
+    public CommonResponse updateOrderStatusFE(@PathVariable("orderCode") String orderCode,@PathVariable("statusid") Integer statusid){
+        return shippingService.updateOrderStatus(orderCode, shippingService.getStatusCodebyId(statusid));
+    }
+
 
 }

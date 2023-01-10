@@ -197,4 +197,16 @@ public class ShippingService {
         }
         return new CommonResponse(new Result("400","fail: Shipping order with code " + code + " can not be found",false));
     }
+
+    public CommonResponse updateOrderStatusFE(String code, Status statuscode){
+        List<ShippingOrder> orderList = shippingOrderRepository.findAll();
+        for(int i = 0; i < orderList.size(); i++) {
+            if (orderList.get(i).getOrderId().equals(code)) {
+                orderList.get(i).setUpdateAt(Instant.now());
+                orderList.get(i).setStatusCode(statuscode);
+                return new CommonResponse(new Result("200","success",true));
+            }
+        }
+        return new CommonResponse(new Result("400","fail: Shipping order with code " + code + " can not be found",false));
+    }
 }
