@@ -192,7 +192,7 @@ public class ShippingOrder {
     }
 
     public Boolean checkValidity(){
-        if(cod < 0 || weight < 0 || fee < 0){
+        if(this.cod < 0 || this.weight < 0 ){
             return false;
         }
         if(orderId.contains("DH")){
