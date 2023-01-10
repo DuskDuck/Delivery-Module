@@ -190,4 +190,18 @@ public class ShippingOrder {
             return (dist);
         }
     }
+
+    public Boolean checkValidity(){
+        if(cod < 0 || weight < 0 || fee < 0){
+            return false;
+        }
+        if(orderId.contains("DH")){
+        }else{
+            return false;
+        }
+        if(warehouse.getAddress().getDistrict() < 0 || receiver.getAddress().getDistrict() < 0){
+            return false;
+        }
+        return true;
+    }
 }
