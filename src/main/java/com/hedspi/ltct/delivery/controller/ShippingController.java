@@ -72,7 +72,7 @@ public class ShippingController {
     }
 
     //ok
-    @PutMapping(path = "/shipping_order/fee/{orderCode}")
+    @GetMapping(path = "/shipping_order/fee/{orderCode}")
     public CommonResponse calShippingFee(@PathVariable("orderCode") String orderCode){
         return shippingService.getOrderfeebyCode(orderCode);
     }
