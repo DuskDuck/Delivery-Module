@@ -198,6 +198,7 @@ public class ShippingService {
         return new CommonResponse(new Result("400","fail: Shipping order with code " + code + " can not be found",false));
     }
 
+    @Transactional
     public CommonResponse updateOrderStatusFE(String code, Status statuscode){
         List<ShippingOrder> orderList = shippingOrderRepository.findAll();
         for(int i = 0; i < orderList.size(); i++) {
