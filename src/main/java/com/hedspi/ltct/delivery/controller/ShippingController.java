@@ -13,8 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
-//@CrossOrigin(origins = "https://delivery-sp09.vercel.app/")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://delivery-sp09.vercel.app/")
+//@CrossOrigin(origins = "http://localhost:3000")
 
 public class ShippingController {
 
